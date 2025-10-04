@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{
+      --bg:white;
+      --card:#2a2a2a;
+      --accent:orange;
+      --muted:#bbb;
+      --text:black;
+    }
+
+    body{
+      margin:0;
+      font-family:"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .slider-container{
+      max-width:1000px;
+      margin:48px auto;
+      background:var(--card);
+      border-radius:10px;
+      overflow:hidden;
+      touch-action:pan-y;
+    }
+
+    .slides{
+      display:flex;
+      transition:transform 0.3s ease-in-out;
+    }
+
+    .slide{
+      min-width:100%;
+      padding:36px;
+      display:flex;
+      gap:36px;
+      box-sizing:border-box;
+    }
+
+    .slide-left{ flex:1; }
+    .slide-left h3{ color:var(--accent); margin:0 0 12px; letter-spacing:2px; }
+    .slide-left h1{ font-size:2.4rem; margin:0 0 20px; line-height:1.2; font-weight:700; }
+    .slide-left h1 span{ color:var(--accent); }
+
+    .slide-right{ flex:1; padding-left:30px; }
+    .slide-right h2{ color:var(--accent); margin-bottom:20px; }
+
+    /* TIMELINE (line left, content right) */
+    .timeline{
+      position:relative;
+      margin-left:20px;
+      padding-left:30px;
+      border-left:2px solid #fff;
+    }
+    .timeline-item{
+      margin-bottom:30px;
+      position:relative;
+    }
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:-40px;  /* dot on line */
+      top:6px;
+      width:14px;
+      height:14px;
+      background:#fff;
+      border-radius:50%;
+      border:3px solid var(--accent);
+    }
+    .timeline-item h3{ margin:0 0 6px; font-size:1.1rem; }
+    .timeline-item p{ margin:0; color:var(--muted); font-size:0.9rem; }
+
+    /* Tools list */
+    .tools-list{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px 24px;
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .tools-list li{
+      position:relative;
+      padding-left:20px;
+      font-size:1rem;
+      color:var(--text);
+    }
+    .tools-list li::before{
+      content:"✔";
+      position:absolute;
+      left:0;
+      color:var(--accent);
+      font-weight:bold;
+    }
+
+    /* nav dots */
+    .dots{text-align:center; margin:20px 0;}
+    .dot{
+      width:12px;height:12px;
+      margin:0 6px;
+      border-radius:50%;
+      background:#555;
+      display:inline-block;
+      cursor:pointer;
+    }
+    .dot.active{background:var(--accent);border:2px solid #fff;}
+
+    @media(max-width:800px){
+      .slide{flex-direction:column; padding:24px;}
+      .slide-right{padding-left:0;}
+      .timeline{margin-left:10px; padding-left:24px;}
+      .timeline-item::before{left:-32px;}
+      .tools-list{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-container" id="slider">
+    <div class="slides" id="slides">
+
+      <!-- Slide 1 -->
+      <div class="slide">
+        <div class="slide-left">
+          <h3>EXPERIENCE</h3>
+          <h1>A light years of<br>experience as a <span>Freelancer</span></h1>
+        </div>
+        <div class="slide-right">
+          <h2>My Resume</h2>
+          <div class="timeline">
+            <div class="timeline-item"><h3>HCA Internet Provider</h3><p>Administrative Assistant (2025)</p></div>
+            <div class="timeline-item"><h3>Gio's Corp.</h3><p>Cold Caller (2025)</p><br><p>Website Designer (2024)</p></div>
+            <div class="timeline-item"><h3>Johnna's Co.</h3><p>Website Designer (2024)</p><br><p>Email Marketer (2024)</p><br><p>Data Entry (2024)</p></div>
+            <div class="timeline-item"><h3>G & T</h3><p>Video Editor (2023)</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Tools -->
+      <div class="slide">
+        <div class="slide-left">
+          <h3>TOOLS</h3>
+          <h1>Skilled. Tooled.<br><span>Results-driven</span></h1>
+          <ul class="tools-list">
+            <li>Google Spreadsheet</li>
+            <li>Google Calendar</li>
+            <li>Gmail</li>
+            <li>Notion</li>
+            <li>Slack</li>
+            <li>GoHighLevel</li>
+            <li>WordPress</li>
+            <li>HubSpot</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Slide 3: Education -->
+      <div class="slide">
+        <div class="slide-left">
+          <h3>EDUCATION</h3>
+          <h1>Lifelong passion for<br><span>Learning</span></h1>
+        </div>
+        <div class="slide-right">
+          <h2>My Education</h2>
+          <div class="timeline">
+            <div class="timeline-item"><h3>Caraga State University</h3><p>Bachelor of Science in Information and Technology (2022 - Present)</p></div>
+            <div class="timeline-item"><h3>ACLC College of Butuan</h3><p>Bachelor of Science in Information and Technology (2021 - 2022)</p></div>
+            <div class="timeline-item"><h3>Saniel-Cruz National High School</h3><p>Graduated (2015 - 2021)</p></div>
+            <div class="timeline-item"><h3>New Bohol Elementary School</h3><p>Graduated (2009 - 2015)</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- dots -->
+    <div class="dots">
+      <span class="dot active" onclick="showSlide(0)"></span>
+      <span class="dot" onclick="showSlide(1)"></span>
+      <span class="dot" onclick="showSlide(2)"></span>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide=0;
+    let isLocked=false;
+    const slides=document.getElementById("slides");
+    const dots=document.querySelectorAll(".dot");
+    const slider=document.getElementById("slider");
+
+    function showSlide(index){
+      if(isLocked) return;
+      if(index<0) index=0;
+      if(index>=dots.length) index=dots.length-1;
+      if(index===currentSlide) return;
+      isLocked=true;
+      currentSlide=index;
+      slides.style.transform=`translateX(-${index*100}%)`;
+      dots.forEach((d,i)=>d.classList.toggle("active",i===currentSlide));
+    }
+
+    slides.addEventListener("transitionend",()=>{isLocked=false;});
+
+    // touch
+    let startX=0;
+    slider.addEventListener("touchstart",e=>{startX=e.touches[0].clientX;},{passive:true});
+    slider.addEventListener("touchend",e=>{
+      if(isLocked) return;
+      const diff=e.changedTouches[0].clientX-startX;
+      if(Math.abs(diff)>0){
+        if(diff>0) showSlide(currentSlide-1);
+        else showSlide(currentSlide+1);
+      }
+    },{passive:true});
+
+    // trackpad
+    let wheelLock=false;
+    slider.addEventListener("wheel",e=>{
+      if(Math.abs(e.deltaX)<=Math.abs(e.deltaY)) return;
+      if(isLocked||wheelLock) return;
+      if(e.deltaX>15) showSlide(currentSlide+1);
+      else if(e.deltaX<-15) showSlide(currentSlide-1);
+      wheelLock=true;
+      setTimeout(()=>wheelLock=false,200);
+    },{passive:true});
+  </script>
+</body>
+</html>
